@@ -2,6 +2,7 @@
 
 import Comentarios from "./comentarios.model.js"
 import { checkUpdate } from "../utils/validator.js"
+import jwt  from "jsonwebtoken"
 
 export const test = (req , res)=>{
     console.log('test is running')
@@ -43,14 +44,18 @@ export const update = async(req, res)=>{
 export const deleteCo = async(req, res)=>{
     try{
         let { id } = req.params
-        let deletedComentario = await Comentarios.findOneAndDelete({
-            $and: [
-                {user: data.user},
-                {authorization: data.authorization}
-            ]
-        })         
-        if(!deletedComentario) return res.status(404).send({message: 'Coemntario is not found and not deleted'})
+        let secretKey = process.env.SECRET_KEY
+        let {authorization} = req.headers
+        let {uid} = jwt.verify(authorization, secretKey)
+        const comentario = await Comentarios.findById(id)
+
+        if(comentario.autor.toString() == uid){
+        let deletedComentario = await Comentarios.findOneAndDelete({_id: id})         
+        if(!deletedComentario) return res.status(404).send({message: 'Comentario is not found and not deleted'})
         return res.send({message: `Opinion with text ${deletedComentario.text} deleted successfully`})
+        }else{
+            return res.status(404).send({message: 'cannot delete this comentario'})
+        }
     }catch(err){
         console.error(err)
         return res.status(500).send({message: 'Error deleting coemntario'})
