@@ -60,7 +60,7 @@ export const deleteO = async(req, res)=>{
 export const search = async(req, res)=>{
     try{
         let { search } = req.body
-        let opinion = await Opiniones.find({name: search})
+        let opinion = await Opiniones.find({titulo: search})
         if(!opinion) return res.status(404).send({message: 'Opinion not found'})
         return res.send({message: 'Opinion found', opinion})
     }catch(err){
