@@ -1,8 +1,5 @@
 import express from 'express'
-import { 
-    validateJwt,
-    isAdmin
-} from '../../middlewares/validate-jwt.js';
+import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 import {
     test,
     register, 

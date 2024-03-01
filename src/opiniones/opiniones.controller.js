@@ -1,7 +1,7 @@
 'use strict'
 
 import Opiniones from "./opiniones.model.js"
-import { checkUpdateOpinion } from "../../utils/validator.js"
+import { checkUpdateOpinion } from "../utils/validator.js"
 
 export const test = (req , res)=>{
     console.log('test is running')

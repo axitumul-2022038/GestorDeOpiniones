@@ -1,7 +1,7 @@
 'use strict'
 
 import { Router } from "express"
-import {validateJwt } from "../../middlewares/validate-jwt.js"
+import { validateJwt} from '../middlewares/validate-jwt.js';
 import { register,test,get,update,deleteC, search } from "./categories.controller.js"
 
 const api = Router()
