@@ -11,6 +11,7 @@ import { config } from "dotenv"
 import userRoutes from '../src/user/user.routes.js'
 import categoryRoutes from '../src/categories/categories.routes.js'
 import opinionRoutes from '../src/opiniones/opiniones.routes.js'
+import comentarioRoutes from '../src/comentarios/comentarios.routes.js'
 
 
 const app = express()
@@ -27,6 +28,7 @@ app.use(morgan('dev'))
 app.use(userRoutes)
 app.use('/category', categoryRoutes)
 app.use('/opinion', opinionRoutes)
+app.use('/comentario', comentarioRoutes)
 
 //Levantar el servidor
 export const initServer = ()=>{
